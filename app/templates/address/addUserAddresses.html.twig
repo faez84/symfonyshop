@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<div class="">
+		<div class="bg-white">
+			<div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 ">
+				<div class="shadow-2xl border-1 border-[#1d1b1b] p-8">
+
+					{{form_start(form)}}
+					<div class="p-4">
+						{{form_label(form.street, 'Street',  {'label_attr': {'class': 'w-[50px]'}})}}
+						{{form_widget(form.street, {'attr': {'class': 'ml-5 shadow-sm border-2 border-[#f3f3f3]'}})}}
+					</div>
+					<div class="p-4">
+						{{form_label(form.zip, 'Zip',  {'label_attr': {'class': 'w-[50px]'}})}}
+						{{form_widget(form.zip, {'attr': {'class': 'ml-5 shadow-sm border-2 border-[#f3f3f3]'}})}}
+					</div>
+					<div class="p-4">
+						{# {{form_label(form.city, 'City'|trans({}, 'messages', 'de'),  {'label_attr': {'class': 'w-[50px]'}})}}#}
+						{{form_label(form.city, 'City'|trans,  {'label_attr': {'class': 'w-[50px]'}})}}
+						{{form_widget(form.city, {'attr': {'class': 'ml-5 shadow-sm border-2 border-[#f3f3f3]'}})}}
+					</div>
+					<div class="p-4">
+						{{form_label(form.defualt, 'Defualt',  {'label_attr': {'class': 'w-[50px]'}})}}
+						{{form_widget(form.defualt, {'attr': {'class': 'ml-5 shadow-sm border-2 border-[#f3f3f3]'}})}}
+					</div>
+					{{form_end(form)}}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
