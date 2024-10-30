@@ -35,7 +35,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ]);
-        $options;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -34,7 +34,7 @@ class RegisterController extends AbstractController
                 $entityManager->persist($user);
                 try{
                 $entityManager->flush();
-                } catch(UniqueConstraintViolationException $exception)
+                } catch(UniqueConstraintViolationException)
                 {
                     return $this->render("registration/register.html.twig", [
                         'registrationForm' => $form,

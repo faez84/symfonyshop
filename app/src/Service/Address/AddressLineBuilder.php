@@ -6,15 +6,21 @@ namespace App\Service\Address;
 
 use App\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class AddressLineBuilder
 {
-    public function __construct(private Security $security)
+    public function __construct(readonly private Security $security)
     {
     }
+
+    /**
+     * @return array<string>
+     */
     public function build(): array
     {
         $addresses = [];
+        /** @var User $user */
         $user = $this->getUser();
         foreach ($user->getAddresses() as $address) {
             $addresses[$address->getId()] = 
@@ -24,7 +30,7 @@ class AddressLineBuilder
        return $addresses;
     }
 
-    public function getUser(): User
+    public function getUser(): UserInterface
     {
         return $this->security->getUser();
     }

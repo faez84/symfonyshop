@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ApiResource]
-class Category
+class Category implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -134,6 +134,6 @@ class Category
 
     public function __toString(): string
     {
-        return $this->getTitle();
+        return (string) $this->getTitle();
     }
 }

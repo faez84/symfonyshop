@@ -117,12 +117,8 @@ class BasketManager
     public function getBasketProducts()
     {
         $basket = $this->session->get('basket');
-        if (isset($basket))
-        {
-            return $basket;
-        }
 
-        return [];
+        return $basket ?? [];
     }
     public function getBasketProductsList(): array
     {

@@ -32,7 +32,7 @@ class OrderCheckout
             $this->executePayment($payment, $order);
             $conn->commit();
 
-        } catch (Exception $exception) {
+        } catch (Exception) {
             $conn->rollBack();
 
             return 'Error during finalizing Order';
@@ -54,6 +54,11 @@ class OrderCheckout
         return $order;
     }
 
+    /**
+     * @param array<array> $productIds
+     * @return void
+     * @throws Exception
+     */
     public function saveOrderArticles(Order $order, array $productIds): void
     {
         foreach ($productIds as $productId => $productData) {

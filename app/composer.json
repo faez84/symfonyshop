@@ -97,6 +97,27 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "s:phpqa:install": "composer install --working-dir=phpqa --prefer-dist -n",
+        "s:phpqa:update": "composer update --working-dir=phpqa",
+        "s:phpqa:rector": "XDEBUG_MODE=off \\phpqa/vendor/bin/rector --dry-run",
+        "s:phpqa:rector:fix": "XDEBUG_MODE=off \\phpqa/vendor/bin/rector",
+        "s:phpqa:linter": "XDEBUG_MODE=off \\phpqa/vendor/bin/parallel-lint src",
+        "s:phpqa:fixer": "XDEBUG_MODE=off \\phpqa/vendor/bin/php-cs-fixer fix --dry-run",
+        "s:phpqa:fixer:fix": "XDEBUG_MODE=off \\phpqa/vendor/bin/php-cs-fixer fix",
+        "s:phpqa:phpcs": "XDEBUG_MODE=off \\phpqa/vendor/bin/phpcs src",
+        "s:phpqa:phpmd": "XDEBUG_MODE=off \\phpqa/vendor/bin/phpmd src ansi codesize",
+        "s:phpqa:psalm": "XDEBUG_MODE=off \\phpqa/vendor/bin/psalm --no-cache --no-suggestions",
+        "s:phpqa:psalm:security": "XDEBUG_MODE=off \\phpqa/vendor/bin/psalm --taint-analysis --no-cache",
+        "s:phpqa:phpstan": "XDEBUG_MODE=off \\phpqa/vendor/bin/phpstan analyse --memory-limit=1G --configuration phpstan.neon",
+        "s:phpqa": [
+            "@s:ide-helper:generate",
+            "@s:phpqa:rector",
+            "@s:phpqa:linter",
+            "@s:phpqa:phpcs",
+            "@s:phpqa:psalm",
+            "@s:phpqa:psalm:security",
+            "@s:phpqa:phpstan"
         ]
     },
     "conflict": {

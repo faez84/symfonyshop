@@ -19,7 +19,7 @@ class LoginController2 extends AbstractController
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
-        dd($error);
+
         return $this->render(
             "security/login.html.twig", 
             [

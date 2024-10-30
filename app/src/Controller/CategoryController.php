@@ -16,8 +16,8 @@ use Symfony\Component\HttpKernel\Attribute\Cache;
 
 class CategoryController extends AbstractController
 {
-    public function __construct(private CategoryRepository $categoriesRepository, 
-    private ProductRepository $productRepository,)
+    public function __construct(
+    readonly private ProductRepository $productRepository,)
     {
 
     }
