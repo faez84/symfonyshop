@@ -31,7 +31,7 @@ class Api extends ApiTestCase
 
             UserFactory::createOne(["email" => "admin@admin.com", "password" => "1Qq!1111"]);
             $user = UserFactory::findBy(["email" => "admin@admin.com"]);
-            var_dump($user);
+            var_dump($user[0]);
 
             $response = static::createClient()->request('POST', '/api/login_check', [
             'json' => [
