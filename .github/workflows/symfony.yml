@@ -57,6 +57,8 @@ jobs:
         DB_PASSWORD: root
         DATABASE_URL: mysql://root:root@127.0.0.1:3306/shopnewnew
       run: composer install
+    - name: Tailwind Build
+      run: php bin/console tailwind:build
     - name: generate jwt pair keys
       run: php bin/console lexik:jwt:generate-keypair
     - name: migrate database

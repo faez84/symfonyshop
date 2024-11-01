@@ -40,7 +40,6 @@ class Api extends ApiTestCase
                     ],
             ]);
             static::$token = json_decode($response->getContent(), true)['token'];
-        var_dump(json_decode($response->getContent(), true));
     }
 
     public function getAdminToken()
