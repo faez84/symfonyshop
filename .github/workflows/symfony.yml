@@ -10,6 +10,8 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+defaults:
+ run:
   working-directory: ./app
 permissions:
   contents: read
