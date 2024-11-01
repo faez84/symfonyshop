@@ -58,4 +58,6 @@ jobs:
         DATABASE_URL: mysql://root:root@127.0.0.1:3306/shopnewnew
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+        DATABASE_URL:  mysql://root:root@127.0.0.1:3306/shopnewnew
       run: vendor/bin/phpunit
