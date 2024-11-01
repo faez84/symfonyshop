@@ -56,7 +56,7 @@ jobs:
         DB_USER: root
         DB_PASSWORD: root
         DATABASE_URL: mysql://root:root@127.0.0.1:3306/shopnewnew
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: composer install
     - name: migrate database
       run: php bin/console doctrine:migrations:migrate
     - name: Execute tests (Unit and Feature tests) via PHPUnit
