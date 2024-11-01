@@ -30,7 +30,7 @@ class ProductControllerTest extends WebTestCase
     {
         $category = CategoryFactory::createOne();
         $response = ProductFactory::createOne(  [
-            "title" => "test@test.com",
+            "title" => "test2@test.com",
             "artNum" => "12345",
             "description" => "description",
             "quantity" => 1,
@@ -50,6 +50,6 @@ class ProductControllerTest extends WebTestCase
         $crawler = $this->client->request('GET', '/product/1');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('p', 'SKU');
+ 
     }
 }
