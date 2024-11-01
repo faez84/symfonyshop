@@ -23,7 +23,6 @@ class Api extends ApiTestCase
         $this->getToken();
         $this->getAdminToken();
         $this->client = static::createClient(); 
-        var_dump(static::createClient());
         $this->em = static::getContainer()->get('doctrine.orm.entity_manager');
     }
     
