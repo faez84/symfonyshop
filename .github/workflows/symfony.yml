@@ -55,7 +55,7 @@ jobs:
         ls
     - name: Build env file 
       run: |
-        sed  -i "\%%APPSECRET%%\${{ secrets.APPSECRET }}\g" .env.dist
+        sed  -i  --  "s\%%APPSECRET%%\${{ secrets.APPSECRET }}\g" .env.dist
         sed  -i "s\%%DB_URL%%\${{ secrets.DB_URL }}\g" .env.dist
         sed  -i "s\%%JWTPASSPHRASE%%\${{ secrets.JWTPASSPHRASE }}\g" .env.dist
         sed  -i "s\%%MERCUREJWTSECRET%%\${{ secrets.MERCUREJWTSECRET }}\g" .env.dist
