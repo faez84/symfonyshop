@@ -64,7 +64,7 @@ jobs:
       run: sed  -i  's/%%MERCUREJWTSECRET%%/${{ secrets.MERCUREJWTSECRET }}/g' .env.dist
     - name: Cat .env
       run: cat .env
-      - name: Replace env file
+    - name: Replace env file
       run: |
         rm .env
         mv .env.dist .env
