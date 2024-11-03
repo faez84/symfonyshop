@@ -39,6 +39,16 @@ jobs:
     - uses: actions/checkout@v4
     - name: Copy .env.test.local
       run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
+    - name: Replace env file
+      run: |
+        rm .env
+        mv .env.dist .env
+    - name: Build env file 
+      run: |
+        sed  -i "s\%%APPSECRET%%\${{ secrets.APPSECRET }}\g" .env
+        sed  -i "s\%%DB_URL%%\${{ secrets.DB_URL }}\g" .env
+        sed  -i "s\%%JWTPASSPHRASE%%\${{ secrets.JWTPASSPHRASE }}\g" .env
+        sed  -i "s\%%MERCUREJWTSECRET%%\${{ secrets.MERCUREJWTSECRET }}\g" .env
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v3
@@ -71,3 +81,7 @@ jobs:
       run: |
         php bin/console --no-interaction doctrine:migrations:migrate
         vendor/bin/phpunit
+    - name: display the fodler
+      run: |
+        pwd
+        ls
