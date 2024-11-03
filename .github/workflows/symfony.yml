@@ -74,6 +74,8 @@ jobs:
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
+    - name: remove vendor
+      run: rm -rf var/cache/dev 
     - name: Install Dependencies
       env:
         DB_CONNECTION: mysql
