@@ -39,7 +39,8 @@ jobs:
     - uses: actions/checkout@v4
     - name: Copy .env.test.local
       run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
-
+    - name: check file
+      run: php -r "file_exists('.env.dist')"
     - name: display the fodler
       run: |
         pwd
