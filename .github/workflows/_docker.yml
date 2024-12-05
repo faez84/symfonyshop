@@ -38,7 +38,7 @@ jobs:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_TOKEN}}
       - name: ls 
-        run: ls app/var/cache/ 
+        run: ls ./app/var/cache/ 
       - name: remove cache
         run: rm -rf app/var/cache/dev 
       - name: Extract metadata (tags, labels) for Docker
