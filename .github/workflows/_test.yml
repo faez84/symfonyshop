@@ -14,7 +14,15 @@ defaults:
   working-directory: .
 
 jobs:
- 
+  InitTest:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+        - name: display the fodler
+          run: |
+            pwd
+            ls
   push-docker-image:
     name: push docker image to hub
     runs-on: ubuntu-latest
@@ -31,7 +39,7 @@ jobs:
       - name: build and push docker image to registry
         uses: docker/build-push-action@v5
         with:
-          context: ./container/symfony/Dockerfile
+          context: ../container/symfony/Dockerfile
           dockerfile: ./container/symfony/Dockerfile
           push: true
           tags: faezsal/demo1:latest
