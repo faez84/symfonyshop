@@ -39,7 +39,7 @@ jobs:
       - name: build and push docker image to registry
         uses: docker/build-push-action@v5
         with:
-          context: ./container/symfony/Dockerfile
+          context: ./container/symfony/
           dockerfile: ./container/symfony/Dockerfile
           push: true
           tags: faezsal/demo1:latest
