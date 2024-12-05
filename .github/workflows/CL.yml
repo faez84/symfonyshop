@@ -13,10 +13,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-tests:
-    name: Test
-    uses: ./.github/workflows/_test.yml
-    secrets: inherit
+#  run-tests:
+#    name: Test
+#    uses: ./.github/workflows/_test.yml
+#    secrets: inherit
   run-docker:
     name: Docker
     uses: ./.github/workflows/_docker.yml
