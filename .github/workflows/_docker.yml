@@ -11,7 +11,7 @@ permissions:
   contents: read
 defaults:
  run:
-  working-directory: .
+  working-directory: ./app
 env:
   REGISTRY: faezsal
   IMAGE_NAME: symfony-shop-app
@@ -69,10 +69,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-
       - name: ls 
-        working-directory: ./app
         run: composer dump-env prod
       - name: remove cache
-        working-directory: ./app
         run: rm -rf var/cache/dev 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -81,6 +79,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: build and push docker image to registry
+        working-directory: ../
         uses: docker/build-push-action@v5
         with:
           context: ./container/symfony/
