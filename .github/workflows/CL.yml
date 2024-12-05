@@ -17,8 +17,7 @@ jobs:
     name: Test
     uses: ./.github/workflows/_test.yml
     secrets: inherit
-
-  run-tests:
+  run-docker:
     name: Docker
     uses: ./.github/workflows/_docker.yml
     secrets: inherit
