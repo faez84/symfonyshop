@@ -38,11 +38,11 @@ jobs:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_TOKEN}}
       - name: ls 
-        run: |
-          pwd
-          ls ./app
+        working-directory: ./app
+        run: composer dump-env prod
       - name: remove cache
-        run: rm -rf app/var/cache/dev 
+        working-directory: ./app
+        run: rm -rf var/cache/dev 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
