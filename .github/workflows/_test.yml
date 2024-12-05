@@ -11,7 +11,7 @@ permissions:
   contents: read
 defaults:
  run:
-  working-directory: 
+  working-directory: .
 
 jobs:
  
@@ -32,5 +32,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./container/symfony/Dockerfile
+          dockerfile: ./container/symfony/Dockerfile
           push: true
           tags: faezsal/demo1:latest
