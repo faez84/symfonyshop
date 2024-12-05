@@ -37,10 +37,10 @@ jobs:
         with:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_TOKEN}}
+      - name: ls 
+        run: ls /app/var/cache/ 
       - name: remove cache
         run: rm -rf /app/var/cache/dev 
-      - name: permission cache
-        run: sudo chown -R www-data:www-data /app/var/cache/ 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
