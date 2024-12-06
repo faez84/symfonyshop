@@ -110,7 +110,7 @@ jobs:
     - name: ls 
       run: composer dump-env prod
     - name: remove cache
-      run: rm -rf var/cache/dev 
+      run: APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
     - name: login to docker registry
       uses: docker/login-action@v3
       with:
