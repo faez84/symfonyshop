@@ -24,11 +24,11 @@
 				<div class=" h-44 bg-gradient-to-b from-cyan-900"></div>
 				 {{ include('layout/header.html.twig') }}
 				{# read and display just one flash message type #}
-				{#{% for message in app.flashes('notice') %}
+				{% for message in app.flashes('notice') %}
 					<div class="flash-notice">
 						{{ message }}
 					</div>
-				{% endfor %}#}
+				{% endfor %}
 				{% block body %}{% endblock %}
 			</div>
 		</div>

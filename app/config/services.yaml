@@ -22,13 +22,15 @@ services:
     payment.PaymentMethodValidator:
         class: App\Service\Payment\PaymentMethodValidator
 
- 
 
     App\Service\BasketManager:
         class: App\Service\BasketManager
         autowire: true
         public: true
-
+    App\Entity\Order:
+        class: App\Entity\Order
+        autowire: true
+        public: true
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 #fos_http_cache:

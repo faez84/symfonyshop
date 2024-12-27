@@ -13,7 +13,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 class UserHashPasswordStateProcessor implements ProcessorInterface 
 {
     public function __construct(
-        #[Autowire(service: 'api_platform.doctrine.orm.state.persist_processor')] readonly private ProcessorInterface $internalProcess,
+        #[Autowire(service: 'api_platform.doctrine.orm.state.persist_processor')]
+        readonly private ProcessorInterface $internalProcess,
         readonly private UserPasswordHasherInterface $userPasswordHasherInterface)
     {
         

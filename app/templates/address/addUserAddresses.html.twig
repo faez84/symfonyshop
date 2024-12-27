@@ -23,6 +23,17 @@
 						{{form_label(form.defualt, 'Defualt',  {'label_attr': {'class': 'w-[50px]'}})}}
 						{{form_widget(form.defualt, {'attr': {'class': 'ml-5 shadow-sm border-2 border-[#f3f3f3]'}})}}
 					</div>
+					<div class="flex flex-row">
+
+						<div class="p-4">
+							{{form_widget(form.save, {'attr': {'class': 'bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md
+											hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'}})}}
+						</div>
+						<div class="p-4">
+							<button onClick="window.history.back();" class="bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md
+											hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Cancel</button>
+						</div>
+					</div>
 					{{form_end(form)}}
 				</div>
 			</div>

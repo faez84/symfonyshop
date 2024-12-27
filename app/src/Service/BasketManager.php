@@ -56,11 +56,18 @@ class BasketManager
         return $basket;
     }
 
+    /**
+     * @param int $productId
+     * @param float $price
+     * @param array $basket
+     * @return void
+     * @throws \App\Exceptions\OutOfStockException
+     */
     private function setBasketToSession(int $productId, float $price, array $basket): void
     {
         $basket['cost'] += $price;
         $amount = $basket['products'][$productId]['amount'] ?? 0;
-        $this->basketValidator->valdiate($productId, $amount);
+        $this->basketValidator->validate($productId, $amount);
         $this->session->set('basket', $basket);
     }
 
@@ -136,5 +143,15 @@ class BasketManager
     public function resetBasket(): void 
     {
         $this->session->remove('basket');
+    }
+
+    public function getProductCount(int $productId): int
+    {
+        $basket = $this->session->get('basket');
+        if (isset($basket['products'][$productId])) {
+            return $basket['products'][$productId]['amount'];
+        }
+
+        return 0;
     }
 }

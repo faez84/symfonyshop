@@ -27,7 +27,7 @@ class OrderController extends AbstractController
     {
 
         return $this->render('order/show.html.twig', [
-            'msg' => "Thank zou for you order!",
+            'msg' => "Thank you for your order!",
         ]);
     }
 }

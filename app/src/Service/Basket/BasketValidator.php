@@ -14,7 +14,7 @@ class BasketValidator
     {
 
     }
-    public function valdiate(int $productId, int $amount): bool
+    public function validate(int $productId, int $amount): bool
     {
         $product = $this->em->getRepository(Product::class)->find($productId);
         $dbAmount = $product->getQuantity();
