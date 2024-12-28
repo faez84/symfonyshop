@@ -98,21 +98,7 @@ jobs:
         DB_PASSWORD: root
         DATABASE_URL: mysql://root:root@127.0.0.1:3306/shopnewnew
       run: composer install
-    - name: Tailwind Build
-      run: php bin/console tailwind:build --minify
-    - name: Asset MApping
-      run: php bin/console asset-map:compile
-    - name: generate jwt pair keys
-      run: php bin/console lexik:jwt:generate-keypair
-    - name: migrate database
-      run: php bin/console doctrine:migrations:migrate
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DATABASE_URL:  mysql://root:root@127.0.0.1:3306/shopnewnew
-      run: |
-        php bin/console --no-interaction doctrine:migrations:migrate
-        vendor/bin/phpunit
-    - name: display the fodler
-      run: |
-        pwd
-        ls
+    - name: install phpqa
+      run: composer s:phpqa:install
+    - name: run phpqa
+      run: composer s:phpqa
