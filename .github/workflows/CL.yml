@@ -15,5 +15,3 @@ jobs:
     name: phpqa
     uses: ./.github/workflows/_phpqa.yml
     secrets: inherit
-
-
