@@ -112,7 +112,6 @@
         "s:phpqa:psalm:security": "XDEBUG_MODE=off \\phpqa/vendor/bin/psalm --taint-analysis --no-cache",
         "s:phpqa:phpstan": "XDEBUG_MODE=off \\phpqa/vendor/bin/phpstan analyse --memory-limit=1G --configuration phpstan.neon",
         "s:phpqa": [
-            "@s:ide-helper:generate",
             "@s:phpqa:rector",
             "@s:phpqa:linter",
             "@s:phpqa:phpcs",
