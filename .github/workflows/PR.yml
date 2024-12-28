@@ -6,7 +6,7 @@
 name: CL
 
 on:
-  push:
+  pull_request:
     branches: [ "master" ]
   workflow_dispatch:
 
@@ -20,9 +20,5 @@ jobs:
     name: Test
     uses: ./.github/workflows/_test.yml
     secrets: inherit
-  run-docker:
-    needs: [ run-tests]
-    name: Docker
-    uses: ./.github/workflows/_docker.yml
-    secrets: inherit
+
 
