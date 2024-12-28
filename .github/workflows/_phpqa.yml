@@ -14,7 +14,7 @@ defaults:
   working-directory: ./app
 
 jobs:
-  InitPHPQA:
+  Init-phpqa:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
