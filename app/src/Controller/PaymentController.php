@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Category;
@@ -23,7 +25,6 @@ class PaymentController extends AbstractController
         protected PaymentMethodFactory $paymentMethodFactory,
         protected OrderCheckout $orderCheckout
     ) {
-
     }
 
     #[Route(path: '/basket/payment', name: "basket_payment")]

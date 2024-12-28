@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\Payment;
 
-class PaymentMethodFactory 
+class PaymentMethodFactory
 {
     public function getPaymentMethod(string $paymentMethod): IPayment
     {

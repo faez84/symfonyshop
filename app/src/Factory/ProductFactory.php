@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Factory;
 
 use App\Entity\Product;
@@ -44,8 +46,7 @@ final class ProductFactory extends PersistentProxyObjectFactory
      */
     protected function initialize(): static
     {
-        return $this
-            // ->afterInstantiate(function(Product $product): void {})
-        ;
+        return $this// ->afterInstantiate(function(Product $product): void {})
+            ;
     }
 }

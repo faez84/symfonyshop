@@ -26,7 +26,7 @@ class OrderArticleSaver
     {
         foreach ($productIds as $productId => $productData) {
             $product = $this->entityManager->getRepository(Product::class)->find($productId);
-            $amount = (int) $productData['amount'];
+            $amount = (int)$productData['amount'];
             $quantity = $product->getQuantity();
             if ($amount > $product->getQuantity()) {
                 throw new Exception(sprintf("Product : %s is out of stock", $product->getTitle()));

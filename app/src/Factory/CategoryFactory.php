@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Factory;
 
 use App\Entity\Category;
@@ -41,8 +43,7 @@ final class CategoryFactory extends PersistentProxyObjectFactory
      */
     protected function initialize(): static
     {
-        return $this
-            // ->afterInstantiate(function(Category $category): void {})
-        ;
+        return $this// ->afterInstantiate(function(Category $category): void {})
+            ;
     }
 }

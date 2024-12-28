@@ -12,7 +12,6 @@ class ProductValidator
 {
     public function __construct(private EntityManagerInterface $em)
     {
-
     }
 
     /**
@@ -26,7 +25,7 @@ class ProductValidator
         $product = $this->em->getRepository(Product::class)->find($product->getId());
         $dbAmount = $product->getQuantity();
         if ($amount > $dbAmount) {
-           throw new OutOfStockException();
+            throw new OutOfStockException();
         }
 
         return true;

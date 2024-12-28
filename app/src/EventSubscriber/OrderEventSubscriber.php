@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class OrderEventSubscriber implements EventSubscriberInterface
 {
-    public function __construct(Private EntityManagerInterface $em)
+    public function __construct(private EntityManagerInterface $em)
     {
     }
 

@@ -18,11 +18,11 @@ jobs:
 #    uses: ./.github/workflows/_test.yml
 #    secrets: inherit
   run-phpqa:
-    name: Docker
+    name: phpqa
     uses: ./.github/workflows/_phpqa.yml
     secrets: inherit
-  run-docker:
-    name: Docker
-    uses: ./.github/workflows/_docker.yml
-    secrets: inherit
+#  run-docker:
+#    name: Docker
+#    uses: ./.github/workflows/_docker.yml
+#    secrets: inherit
 

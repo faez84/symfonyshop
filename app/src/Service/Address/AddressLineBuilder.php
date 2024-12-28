@@ -23,11 +23,11 @@ class AddressLineBuilder
         /** @var User $user */
         $user = $this->getUser();
         foreach ($user->getAddresses() as $address) {
-            $addresses[$address->getId()] = 
-            sprintf('%s, %s %s', $address->getStreet(), $address->getZip(), $address->getCity());
+            $addresses[$address->getId()] =
+                sprintf('%s, %s %s', $address->getStreet(), $address->getZip(), $address->getCity());
         }
 
-       return $addresses;
+        return $addresses;
     }
 
     public function getUser(): UserInterface

@@ -14,6 +14,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->skip(
         [
             AddLiteralSeparatorToNumberRector::class,
+            __DIR__ . '/src/Kernel.php',
         ]
     );
     $rectorConfig->import(LevelSetList::UP_TO_PHP_80);

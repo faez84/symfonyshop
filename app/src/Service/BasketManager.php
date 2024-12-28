@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service;
@@ -13,11 +14,10 @@ class BasketManager
     protected SessionInterface $session;
 
     public function __construct(
-        protected RequestStack $requestStack, 
+        protected RequestStack $requestStack,
         protected ProductRepository $productRepository,
         protected BasketValidator $basketValidator
-        ) 
-    {
+    ) {
         $this->session = $requestStack->getSession();
     }
 
@@ -33,7 +33,7 @@ class BasketManager
                 "amount" => 1,
                 "price" => $price
             ]
-        ],
+            ],
             "cost" => $price
         ];
 
@@ -44,13 +44,13 @@ class BasketManager
     {
         if (!isset($basket['products'][$productId])) {
             $basket['products'][$productId] = [
-                    "amount" => 1,
-                    "price" => $price
+                "amount" => 1,
+                "price" => $price
             ];
 
-            return $basket;   
-        } 
-        
+            return $basket;
+        }
+
         $basket['products'][$productId]['amount']++;
 
         return $basket;
@@ -71,40 +71,40 @@ class BasketManager
         $this->session->set('basket', $basket);
     }
 
-    public function addToBasket(int $productId, float $price = 0.0) : void 
+    public function addToBasket(int $productId, float $price = 0.0): void
     {
-        
+
         $basket = $this->getBasket();
         if (!isset($basket)) {
             $this->initBasket($productId, $price);
 
             return;
-
         }
 
         $basket = $this->updateBasket($basket, $productId, $price);
-        
+
         $this->setBasketToSession($productId, $price, $basket);
     }
 
-    public function deleteFromBasket(int $productId) : void 
+    public function deleteFromBasket(int $productId): void
     {
         $basket = $this->session->get('basket');
         if (!isset($basket)) {
-           return;
-        } 
+            return;
+        }
 
         $basket = $this->session->get('basket');
         if (isset($basket['products'][$productId])) {
             $basket['products'][$productId]['amount']--;
-            if($basket['products'][$productId]['amount'] == 0) {
+            if ($basket['products'][$productId]['amount'] == 0) {
                 unset($basket['products'][$productId]);
             }
         }
 
         $this->session->set('basket', $basket);
     }
-    public function setRequestStack(RequestStack $requestStack) : void 
+
+    public function setRequestStack(RequestStack $requestStack): void
     {
         $this->requestStack = $requestStack;
         $this->session = $requestStack->getSession();
@@ -113,9 +113,8 @@ class BasketManager
     public function getBasketProductsCount(): float|int
     {
         $basket = $this->session->get('basket');
-        if (isset($basket))
-        { 
-            return array_sum(array_column($basket["products"],'amount'));
+        if (isset($basket)) {
+            return array_sum(array_column($basket["products"], 'amount'));
         }
 
         return 0;
@@ -127,12 +126,12 @@ class BasketManager
 
         return $basket ?? [];
     }
+
     public function getBasketProductsList(): array
     {
         $products = [];
         $basket = $this->session->get('basket');
-        if (isset($basket))
-        {
+        if (isset($basket)) {
             $ids = array_keys($basket["products"]);
             $products = $this->productRepository->findInValues($ids);
         }
@@ -140,7 +139,7 @@ class BasketManager
         return $products;
     }
 
-    public function resetBasket(): void 
+    public function resetBasket(): void
     {
         $this->session->remove('basket');
     }

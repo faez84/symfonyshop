@@ -1,6 +1,6 @@
 <?php
 
-
+declare(strict_types=1);
 
 namespace App\Twig;
 
@@ -13,8 +13,8 @@ class AppExtension extends AbstractExtension
 {
     public function __construct(private CategoryRepository $categoriesRepository, private \Twig\Environment $twig)
     {
-
     }
+
     public function getFunctions(): array
     {
         return [

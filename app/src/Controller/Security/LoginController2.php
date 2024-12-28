@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controller\Security;
+declare(strict_types=1);
 
+namespace App\Controller\Security;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +11,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController2 extends AbstractController
 {
-
     #[Route("/login2", name:"app_login2")]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -21,12 +21,11 @@ class LoginController2 extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
 
         return $this->render(
-            "security/login.html.twig", 
+            "security/login.html.twig",
             [
                 'userName' => $authenticationUtils->getLastUsername(),
-                'error' => $error    
+                'error' => $error
             ]
         );
-
     }
 }

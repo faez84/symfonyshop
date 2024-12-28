@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Category;
@@ -20,7 +22,6 @@ class BasketController extends AbstractController
 {
     public function __construct(protected BasketManager $basketManager, protected ProductValidator $productValidator)
     {
-
     }
 
     #[Route(path: '/basket/product/{product}', name: "add_basket_product")]

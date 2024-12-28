@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Service\Order;
+
 use App\Entity\Order;
 use App\Event\OrderEvent;
 use App\EventSubscriber\OrderEventSubscriber;
@@ -16,13 +17,14 @@ class OrderCheckout
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        protected BasketManager                 $basketManager,
-        protected OrderSaver                    $orderSaver,
+        protected BasketManager $basketManager,
+        protected OrderSaver $orderSaver,
         protected OrderArticleSaver $orderArticleSaver,
-        protected EventDispatcherInterface      $dispatcher
+        protected EventDispatcherInterface $dispatcher
     ) {
         $this->dispatcher->addSubscriber(new OrderEventSubscriber($this->entityManager));
     }
+
     public function finalizeOrder(IPayment $payment, int $addressId): bool|string
     {
         $conn = $this->entityManager->getConnection();
@@ -33,7 +35,6 @@ class OrderCheckout
             $this->orderArticleSaver->save($order, $basket["products"]);
             $this->executePayment($payment, $order);
             $conn->commit();
-
         } catch (Exception) {
             $conn->rollBack();
 
