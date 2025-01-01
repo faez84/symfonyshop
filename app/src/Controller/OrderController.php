@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Category;
@@ -18,8 +20,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class OrderController extends AbstractController
 {
-    public function __construct() {
-
+    public function __construct()
+    {
     }
 
     #[Route(path: '/order', name: "order_execute")]
@@ -27,7 +29,7 @@ class OrderController extends AbstractController
     {
 
         return $this->render('order/show.html.twig', [
-            'msg' => "Thank zou for you order!",
+            'msg' => "Thank you for your order!",
         ]);
     }
 }

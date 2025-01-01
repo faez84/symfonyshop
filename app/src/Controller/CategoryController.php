@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Category;
@@ -17,9 +19,8 @@ use Symfony\Component\HttpKernel\Attribute\Cache;
 class CategoryController extends AbstractController
 {
     public function __construct(
-    readonly private ProductRepository $productRepository,)
-    {
-
+        readonly private ProductRepository $productRepository
+    ) {
     }
 
     #[Route(path: '/category/{id}/products', name: "category_products")]

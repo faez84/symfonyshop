@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Product;
@@ -18,18 +20,17 @@ class ProductRepository extends ServiceEntityRepository
 
 
     /**
-        * @return array
-        */
-       public function findInValues(array $ids): array
-       {
-           return $this->createQueryBuilder('p')
-               ->andWhere('p.id in (:ids)')
-               ->setParameter('ids', value: $ids)
-               ->orderBy('p.id', 'ASC')
-               ->getQuery()
-               ->getResult()
-           ;
-       }
+     * @return array
+     */
+    public function findInValues(array $ids): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.id in (:ids)')
+            ->setParameter('ids', value: $ids)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    public function findOneBySomeField($value): ?Product
     //    {

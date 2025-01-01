@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Category;
@@ -23,25 +25,24 @@ class PaymentController extends AbstractController
         protected PaymentMethodFactory $paymentMethodFactory,
         protected OrderCheckout $orderCheckout
     ) {
-
     }
 
     #[Route(path: '/basket/payment', name: "basket_payment")]
     public function basketPayment(Request $request): Response
     {
-
-        $form = $this->createForm(PaymentFormType::class, ['CreditCard' => 'CreditCard', 'Paypal' => 'Paypal']);
+        $addressId = $request->get('addressId');
+        $form = $this->createForm(PaymentFormType::class, [
+            'methods' => ['CreditCard' => 'CreditCard', 'Paypal' => 'Paypal'],
+            'addressId' => $addressId
+        ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // data is an array with "name", "email", and "message" keys
             $data = $form->getData();
-
-            //$paymentMethodValidator = $this->container->get('payment.PaymentMethodValidator');
-            //$paymentMethodFactory = $this->container->get(PaymentMethodFactory::class);
             if ($this->paymentMethodValidator->valdiate($data['paymentMethod'])) {
-
+                $addressId = $data['addressId'];
                 $paymentMethod = $this->paymentMethodFactory->getPaymentMethod($data['paymentMethod']);
-                $result = $this->orderCheckout->finalizeOrder($paymentMethod);
+                $result = $this->orderCheckout->finalizeOrder($paymentMethod, $addressId);
                 if ($result === true) {
                     return $this->redirectToRoute('order_execute');
                 }
@@ -55,6 +56,7 @@ class PaymentController extends AbstractController
         return $this->render('payment/list.html.twig', [
             'payments' => ['Cridetcard', 'Paypal'],
             'form' => $form,
+            'addressId' => $addressId
         ]);
     }
 }

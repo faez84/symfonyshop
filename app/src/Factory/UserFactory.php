@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Factory;
 
 use App\Entity\User;
@@ -46,9 +48,8 @@ final class UserFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-        ->afterInstantiate(function(User $user) {
-            $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
-        })
-    ;
+            ->afterInstantiate(function (User $user) {
+                $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
+            });
     }
 }

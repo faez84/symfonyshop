@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
@@ -78,7 +80,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['user:reset'])]
     #[Assert\Expression(
         'value == this.getNewPassword()',
-        message: 'Please confirm the new password' 
+        message: 'Please confirm the new password'
     )]
     private ?string $repeatPassword = null;
 

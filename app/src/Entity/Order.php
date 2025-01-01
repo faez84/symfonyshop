@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
@@ -36,6 +38,10 @@ class Order
      */
     #[ORM\OneToMany(targetEntity: OrderProduct::class, mappedBy: 'orderId', orphanRemoval: true)]
     private Collection $orderProducts;
+
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Address $address = null;
 
     public function __construct()
     {
@@ -121,6 +127,18 @@ class Order
                 $orderProduct->setOOrder($this);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): static
+    {
+        $this->address = $address;
 
         return $this;
     }

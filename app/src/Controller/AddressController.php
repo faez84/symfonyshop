@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Address;
@@ -18,10 +20,9 @@ class AddressController extends AbstractController
         private AddressLineBuilder $addressBuilder,
         private readonly EntityManagerInterface $entityManager,
         private readonly Security $security
-
     ) {
-
     }
+
     #[Route(path: '/basket/show_user_address', name: "show_user_address")]
     public function showUserAddresses(Request $request): Response
     {
