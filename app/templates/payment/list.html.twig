@@ -6,10 +6,9 @@
             <div class="">
                 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                 {{ form_widget(form) }}
-                <input type="hidden" id="addressId" value="{{ addressId }}">
+                <input type="hidden" id="addressId" name="addressId" value="{{ addressId }}">
                 {{ form_end(form) }}
             </div>
         </div>
     </div>
-
 {% endblock %}

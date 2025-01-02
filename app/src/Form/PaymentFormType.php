@@ -25,9 +25,6 @@ class PaymentFormType extends AbstractType
         $builder
             ->add('paymentMethod', ChoiceType::class, options: [
                 'choices' => $options['data']['methods']])
-            ->add('addressId', HiddenType::class, options: [
-                'data' => $options['data']['addressId']
-            ])
             ->add('save', SubmitType::class);
     }
 }

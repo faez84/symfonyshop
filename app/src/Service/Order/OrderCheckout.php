@@ -35,10 +35,10 @@ class OrderCheckout
             $this->orderArticleSaver->save($order, $basket["products"]);
             $this->executePayment($payment, $order);
             $conn->commit();
-        } catch (Exception) {
+        } catch (Exception $ex) {
             $conn->rollBack();
 
-            return 'Error during finalizing Order';
+            return sprintf('Error during finalizing Order: %s', $ex->getMessage());
         }
         return true;
     }

@@ -1,0 +1,22 @@
+{# templates/admin/business_stats/index.html.twig #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title 'Business Stats' %}
+{% block main %}
+  <table>
+    <thead> {# ... #} </thead>
+    <tbody>
+    {% for customer_data in data %}
+      <tr>
+        {# ... #}
+
+        <td>
+          <a href="{{ ea_url().setRoute('admin_business_stats_customer', { id: customer_data.id }) }}">
+            View Details
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
