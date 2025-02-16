@@ -14,7 +14,7 @@ class OrderSaver
     {
     }
 
-    public function save(string $payment, int $addressId, float $cost): Order
+    public function save(string $payment, string $addressId, float $cost): Order
     {
         $address = $this->entityManager->getRepository(Address::class)->find($addressId);
         $order = new Order();

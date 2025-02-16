@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-symfony-shopapp-new2
+  labels:
+    app: symfony-shopapp-new2
+spec:
+  type: LoadBalancer
+  ports:
+    - targetPort: 80
+      port: 80
+      nodePort: 30024
+
+  selector:
+    app: symfony-shopapp-new2
+    type: fe-end
