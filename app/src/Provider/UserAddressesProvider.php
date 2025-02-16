@@ -16,8 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Summary of UserAddressesProvider
- * 
  * @template-implements ProviderInterface<Collection>
  */
 class UserAddressesProvider implements ProviderInterface
