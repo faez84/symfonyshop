@@ -27,7 +27,7 @@ use ApiPlatform\Metadata\Link;
             uriTemplate: '/categories/{id}/products',
             uriVariables: [
                 'id' => new Link(fromClass: Category::class, toProperty: 'category'),
-            ], 
+            ],
             paginationItemsPerPage: 10,
             paginationEnabled:true,
         ),
