@@ -24,12 +24,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[ApiResource(operations:[
     new GetCollection(
-       
         uriTemplate: '/users/addresses',
         normalizationContext: ['groups' => ['user:address:read']],
-        
     ),
-
 ], provider: UserAddressesProvider::class,)]
 
 #[ApiResource(operations:[

@@ -24,17 +24,12 @@ use ApiPlatform\Metadata\Link;
     operations: [
         new Get(),
         new GetCollection(),
- #       new Get(
- #           uriTemplate: '/categories/{id}/products',
- #           requirements: ['id' => '\d+'],
- #           normalizationContext: ['groups' => ['category:product:read']],
- #       ),
         new Post(security: "is_granted('ROLE_ADMIN')"),
         new Put(security: "is_granted('ROLE_ADMIN')"),
         new Patch(security: "is_granted('ROLE_ADMIN')"),
         new Delete(security: "is_granted('ROLE_ADMIN')")
     ]
-    )]
+)]
 class Category implements \Stringable
 {
     #[ORM\Id]

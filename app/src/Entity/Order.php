@@ -12,15 +12,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
 
-
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
- 
 #[ApiResource(
     normalizationContext: ['groups' => ['order:read']],
     denormalizationContext: ['groups' => ['order:write']]
-    )]
-#[ORM\HasLifecycleCallbacks]    
+)]
+#[ORM\HasLifecycleCallbacks]
 class Order
 {
     #[ORM\Id]
@@ -48,7 +46,7 @@ class Order
     /**
      * @var Collection<int, OrderProduct>
      */
-    #[ORM\OneToMany(targetEntity: OrderProduct::class, mappedBy: 'oorder',  cascade:["persist"], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: OrderProduct::class, mappedBy: 'oorder', cascade:["persist"], orphanRemoval: true)]
     private Collection $orderProducts;
 
     #[Groups(["order:read", "order:write"])]
@@ -114,7 +112,6 @@ class Order
 
         return $this;
     }
- 
 
     /**
      * @return Collection<int, OrderProduct>

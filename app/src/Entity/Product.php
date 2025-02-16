@@ -22,16 +22,16 @@ use ApiPlatform\Metadata\Link;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
-    operations: [        
-        new GetCollection( 
-            uriTemplate: '/categories/{id}/products',    
+    operations: [
+        new GetCollection(
+            uriTemplate: '/categories/{id}/products',
             uriVariables: [
                 'id' => new Link(fromClass: Category::class, toProperty: 'category'),
-            ],       
+            ],     
             paginationItemsPerPage: 10,
             paginationEnabled:true,
- 
-    ),]
+        ),
+    ]
 )]
 #[ApiResource(
     operations: [

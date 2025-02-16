@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: OrderProductRepository::class)]
 #[ApiResource]
-#[ORM\HasLifecycleCallbacks] 
+#[ORM\HasLifecycleCallbacks]
 class OrderProduct implements \Stringable
 {
     #[ORM\Id]
@@ -74,7 +74,7 @@ class OrderProduct implements \Stringable
     {
         return $this->createdAt;
     }
-    
+
     #[ORM\PrePersist]
     public function setCreatedAt(): static
     {
