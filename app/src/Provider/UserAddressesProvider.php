@@ -12,6 +12,13 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use ApiPlatform\State\ProviderInterface;
 
+/**
+ * Retrieves data from a persistence layer.
+ *
+ * @template T of object
+ *
+ * @author Antoine Bluchet <soyuka@gmail.com>
+ */
 class UserAddressesProvider implements ProviderInterface
 {
     public function __construct(
