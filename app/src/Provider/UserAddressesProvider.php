@@ -11,6 +11,8 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use ApiPlatform\State\ProviderInterface;
+use ApiPlatform\State\Pagination\PartialPaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Retrieves data from a persistence layer.
@@ -29,6 +31,14 @@ class UserAddressesProvider implements ProviderInterface
     ) {
     }
 
+        /**
+     * Provides data.
+     *
+     * @param array<string, mixed>                                                   $uriVariables
+     * @param array<string, mixed>|array{request?: Request, resource_class?: string} $context
+     *
+     * @return T|PartialPaginatorInterface<T>|iterable<T>|null
+     */
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
         /** @var User $user */
