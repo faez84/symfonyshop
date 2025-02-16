@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Repository\UserRepository;
+use App\Provider\UserAddressesProvider;
 use App\State\UserHashPasswordStateProcessor;
 use App\State\UserResetPasswordProcessor;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -21,6 +22,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[ApiResource(operations:[
+    new GetCollection(
+        uriTemplate: '/users/addresses',
+        normalizationContext: ['groups' => ['user:address:read']],
+    ),
+], provider: UserAddressesProvider::class,)]
 
 #[ApiResource(operations:[
     new Get(
@@ -29,6 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     new GetCollection(
         normalizationContext: ['groups' => ['user:read']]
     ),
+
     new Post(
         processor: UserHashPasswordStateProcessor::class,
         denormalizationContext: ['groups' => ['user:write']],
@@ -84,6 +92,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $repeatPassword = null;
 
+    #[Groups(['user:address:read'])]
     /**
      * @var Collection<int, Address>
      */

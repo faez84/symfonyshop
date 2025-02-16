@@ -8,10 +8,12 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\OrderProductRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: OrderProductRepository::class)]
 #[ApiResource]
-class OrderProduct
+#[ORM\HasLifecycleCallbacks]
+class OrderProduct implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,10 +21,11 @@ class OrderProduct
     private ?int $id = null;
 
 
-
+    #[Groups(["order:read", "order:write"])]
     #[ORM\Column]
     private ?int $amount = null;
 
+    #[Groups(["order:read", "order:write"])]
     #[ORM\Column]
     private ?float $cost = null;
 
@@ -33,6 +36,7 @@ class OrderProduct
     #[ORM\JoinColumn(nullable: false)]
     private ?Order $oorder = null;
 
+    #[Groups(["order:read", "order:write"])]
     #[ORM\ManyToOne(inversedBy: 'orderProducts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $pproduct = null;
@@ -71,6 +75,7 @@ class OrderProduct
         return $this->createdAt;
     }
 
+    #[ORM\PrePersist]
     public function setCreatedAt(): static
     {
         $this->createdAt =  new DateTimeImmutable();
@@ -97,8 +102,13 @@ class OrderProduct
 
     public function setPproduct(?Product $pproduct): static
     {
+        $pproduct->setQuantity($pproduct->getQuantity() - $this->getAmount());
         $this->pproduct = $pproduct;
 
         return $this;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->getId();
     }
 }

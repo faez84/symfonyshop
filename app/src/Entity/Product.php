@@ -17,10 +17,22 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
-use Symfony\UX\Turbo\Attribute\Broadcast;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Metadata\Link;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            uriTemplate: '/categories/{id}/products',
+            uriVariables: [
+                'id' => new Link(fromClass: Category::class, toProperty: 'category'),
+            ],
+            paginationItemsPerPage: 10,
+            paginationEnabled:true,
+        ),
+    ]
+)]
 #[ApiResource(
     operations: [
         new Get(),
@@ -43,23 +55,23 @@ class Product
     private ?int $id = null;
 
     #[Assert\NotBlank()]
-    #[Groups(["product:read", "product:write"])]
+    #[Groups(["product:read", "product:write", "category:product:read"])]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[Groups(["product:read", "product:write"])]
+    #[Groups(["product:read", "product:write", "category:product:read"])]
     #[ORM\Column]
     private ?float $price = null;
 
-    #[Groups(["product:read", "product:write"])]
+    #[Groups(["product:read", "product:write", "category:product:read"])]
     #[ORM\Column]
     private ?int $quantity = null;
 
-    #[Groups(["product:read", "product:write"])]
+    #[Groups(["product:read", "product:write", "category:product:read"])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[Groups(["product:read", "product:write"])]
+    #[Groups(["product:read", "product:write", "category:product:read"])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
     #[Groups(["product:read", "product:write"])]
