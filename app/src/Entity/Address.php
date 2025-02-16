@@ -9,22 +9,27 @@ use App\Repository\AddressRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
 #[ApiResource]
 class Address
 {
+    #[Groups(["user:address:read"])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(["user:address:read"])]
     #[ORM\Column(length: 255)]
     private ?string $street = null;
 
+    #[Groups(["user:address:read"])]
     #[ORM\Column(length: 100)]
     private ?string $city = null;
 
+    #[Groups(["user:address:read"])]
     #[ORM\Column(length: 15)]
     private ?string $zip = null;
 

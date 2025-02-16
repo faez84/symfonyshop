@@ -10,9 +10,31 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use Symfony\Component\Serializer\Attribute\Groups;
+use ApiPlatform\Metadata\Link;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection(),
+ #       new Get(
+ #           uriTemplate: '/categories/{id}/products',
+ #           requirements: ['id' => '\d+'],
+ #           normalizationContext: ['groups' => ['category:product:read']],
+ #       ),
+        new Post(security: "is_granted('ROLE_ADMIN')"),
+        new Put(security: "is_granted('ROLE_ADMIN')"),
+        new Patch(security: "is_granted('ROLE_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_ADMIN')")
+    ]
+    )]
 class Category implements \Stringable
 {
     #[ORM\Id]
@@ -36,7 +58,9 @@ class Category implements \Stringable
     /**
      * @var Collection<int, Product>
      */
-    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category', orphanRemoval: false)]
+    #[Groups(["category:product:read"])]
+    #[Link(toProperty: 'category')]
+     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category', orphanRemoval: false)]
     private Collection $products;
 
     public function __construct()

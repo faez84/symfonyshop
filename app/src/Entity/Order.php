@@ -10,10 +10,17 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
-#[ApiResource]
+ 
+#[ApiResource(
+    normalizationContext: ['groups' => ['order:read']],
+    denormalizationContext: ['groups' => ['order:write']]
+    )]
+#[ORM\HasLifecycleCallbacks]    
 class Order
 {
     #[ORM\Id]
@@ -22,23 +29,29 @@ class Order
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(["order:read", "order:write"])]
     private ?float $cost = null;
 
+    #[Groups(["order:read", "order:write"])]
     #[ORM\Column(length: 255)]
     private ?string $payment = null;
 
+    #[Groups(["order:read", "order:write"])]
     #[ORM\Column(length: 15)]
     private ?string $status = null;
 
+    #[Groups(["order:read", "order:write"])]
     #[ORM\Column]
     private ?DateTimeImmutable $createdAt = null;
 
+    #[Groups(["order:read", "order:write"])]
     /**
      * @var Collection<int, OrderProduct>
      */
-    #[ORM\OneToMany(targetEntity: OrderProduct::class, mappedBy: 'orderId', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: OrderProduct::class, mappedBy: 'oorder',  cascade:["persist"], orphanRemoval: true)]
     private Collection $orderProducts;
 
+    #[Groups(["order:read", "order:write"])]
     #[ORM\ManyToOne(inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Address $address = null;
@@ -94,12 +107,14 @@ class Order
         return $this->createdAt;
     }
 
+    #[ORM\PrePersist]
     public function setCreatedAt(): static
     {
         $this->createdAt =  new DateTimeImmutable();
 
         return $this;
     }
+ 
 
     /**
      * @return Collection<int, OrderProduct>
