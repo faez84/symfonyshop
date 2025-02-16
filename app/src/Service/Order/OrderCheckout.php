@@ -25,7 +25,7 @@ class OrderCheckout
         $this->dispatcher->addSubscriber(new OrderEventSubscriber($this->entityManager));
     }
 
-    public function finalizeOrder(IPayment $payment, int $addressId): bool|string
+    public function finalizeOrder(IPayment $payment, string $addressId): bool|string
     {
         $conn = $this->entityManager->getConnection();
         $conn->beginTransaction();
