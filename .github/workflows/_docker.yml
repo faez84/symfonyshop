@@ -9,7 +9,7 @@ on:
   push:
     tags: [ v* ]
   workflow_dispatch:
-  
+
 permissions:
   contents: read
 defaults:
@@ -68,9 +68,8 @@ jobs:
         sed  -i  's/%%DBHOST%%/${{ secrets.DBHOST }}/g' .env.dist
         sed  -i  's/%%DBNAME%%/${{ secrets.DBNAME }}/g' .env.dist
         sed  -i  's/%%DBPORT%%/${{ secrets.DBPORT }}/g' .env.dist
-
-      run: sed  -i  's/%%JWTPASSPHRASE%%/${{ secrets.JWTPASSPHRASE }}/g' .env.dist
-      run: sed  -i  's/%%MERCUREJWTSECRET%%/${{ secrets.MERCUREJWTSECRET }}/g' .env.dist
+        sed  -i  's/%%JWTPASSPHRASE%%/${{ secrets.JWTPASSPHRASE }}/g' .env.dist
+        sed  -i  's/%%MERCUREJWTSECRET%%/${{ secrets.MERCUREJWTSECRET }}/g' .env.dist
     - name: Replace env file
       run: |
         rm .env
