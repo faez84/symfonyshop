@@ -58,21 +58,15 @@ jobs:
         pwd
         ls
     - name: Build env file
-      run: sed  -i  's/%%APPSECRET%%/${{ secrets.APPSECRET }}/g' .env.dist
-    - name: Build env file
-      run: sed  -i  's/%%DBUS%%/${{ secrets.DBUS }}/g' .env.dist
-    - name: Build env file
-      run: sed  -i  's/%%DBPASS%%/${{ secrets.DBPASS }}/g' .env.dist
-    - name: Build env file
-      run: sed  -i  's/%%DBHOST%%/${{ secrets.DBHOST }}/g' .env.dist
-    - name: Build env file
-      run: sed  -i  's/%%DBNAME%%/${{ secrets.DBNAME }}/g' .env.dist
-    - name: Build env file
-      run: sed  -i  's/%%DBPORT%%/${{ secrets.DBPORT }}/g' .env.dist
+      run: |
+        sed  -i  's/%%APPSECRET%%/${{ secrets.APPSECRET }}/g' .env.dist
+        sed  -i  's/%%DBUS%%/${{ secrets.DBUS }}/g' .env.dist
+        sed  -i  's/%%DBPASS%%/${{ secrets.DBPASS }}/g' .env.dist
+        sed  -i  's/%%DBHOST%%/${{ secrets.DBHOST }}/g' .env.dist
+        sed  -i  's/%%DBNAME%%/${{ secrets.DBNAME }}/g' .env.dist
+        sed  -i  's/%%DBPORT%%/${{ secrets.DBPORT }}/g' .env.dist
 
-    - name: Build env file
       run: sed  -i  's/%%JWTPASSPHRASE%%/${{ secrets.JWTPASSPHRASE }}/g' .env.dist
-    - name: Build env file
       run: sed  -i  's/%%MERCUREJWTSECRET%%/${{ secrets.MERCUREJWTSECRET }}/g' .env.dist
     - name: Replace env file
       run: |
@@ -90,6 +84,10 @@ jobs:
           ${{ runner.os }}-php-
     - name: remove vendor
       run: rm -rf var/cache/dev
+    - name: Configure Environment Variables
+      run: | 
+        export APP_ENV=prod
+        composer dump-env prod
     - name: Install Dependencies
       env:
         DB_CONNECTION: mysql
@@ -99,16 +97,10 @@ jobs:
         DB_USER: root
         DB_PASSWORD: root
         DATABASE_URL: mysql://root:root@127.0.0.1:3306/shopnewnew
-      run: composer install
-    - name: Tailwind Build
-      run: php bin/console tailwind:build --minify
-    - name: Asset MApping
-      run: php bin/console asset-map:compile
+      run: composer install --no-dev --optimize-autoloader
     - name: generate jwt pair keys
       run: php bin/console lexik:jwt:generate-keypair
 
-    - name: ls
-      run: composer dump-env prod
     - name: remove cache
       run: APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
     - name: login to docker registry
