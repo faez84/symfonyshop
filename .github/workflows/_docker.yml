@@ -3,10 +3,13 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: _test
+name: _docker
 
 on:
-  workflow_call:
+  push:
+    tags: [ v* ]
+  workflow_dispatch:
+  
 permissions:
   contents: read
 defaults:
