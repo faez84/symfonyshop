@@ -83,10 +83,10 @@ jobs:
           ${{ runner.os }}-php-
     - name: remove vendor
       run: rm -rf var/cache/dev
-    - name: Set App Environemnt
-      run: export APP_ENV=prod
     - name: Configure Environment Variables
       run: composer dump-env prod
+    - name: Set App Environemnt
+      run: export APP_ENV=prod
     - name: Install Dependencies
       env:
         DB_CONNECTION: mysql
