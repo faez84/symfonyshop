@@ -5,20 +5,13 @@
 
 name: CL
 
-
+on:
+  push:
+    tags: [ v* ]
+  workflow_dispatch:
 
 jobs:
-  run-phpqa:
-    name: phpqa
-    uses: ./.github/workflows/_phpqa.yml
-    secrets: inherit
-  run-tests:
-    needs: [ run-phpqa]
-    name: Test
-    uses: ./.github/workflows/_test.yml
-    secrets: inherit
   run-docker:
-    needs: [ run-tests]
     name: Docker
     uses: ./.github/workflows/_docker.yml
     secrets: inherit

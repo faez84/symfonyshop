@@ -6,10 +6,7 @@
 name: _docker
 
 on:
-  push:
-    tags: [ v* ]
-  workflow_dispatch:
-
+  workflow_call:
 permissions:
   contents: read
 defaults:
@@ -86,10 +83,10 @@ jobs:
           ${{ runner.os }}-php-
     - name: remove vendor
       run: rm -rf var/cache/dev
+    - name: Set App Environemnt
+      run: export APP_ENV=prod
     - name: Configure Environment Variables
-      run: | 
-        export APP_ENV=prod
-        composer dump-env prod
+      run: composer dump-env prod
     - name: Install Dependencies
       env:
         DB_CONNECTION: mysql
