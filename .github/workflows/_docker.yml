@@ -85,8 +85,7 @@ jobs:
       run: rm -rf var/cache/dev
     - name: Set App Environemnt
       run: export APP_ENV=prod
-    - name: Configure Environment Variables
-      run: composer dump-env prod
+
     - name: Install Dependencies
       env:
         DB_CONNECTION: mysql
@@ -112,7 +111,8 @@ jobs:
       uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
+    - name: Configure Environment Variables
+      run: composer dump-env prod
     - name: build and push docker image to registry
       uses: docker/build-push-action@v5
       with:
