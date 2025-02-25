@@ -60,7 +60,7 @@ jobs:
     - name: Build env file
       run: |
         sed  -i  's/%%APPSECRET%%/${{ secrets.APPSECRET }}/g' .env.local.dist.php
-        sed  -i  's/%%DBUS%%/${{ secrets.DBUS }}/g' ..env.local.dist.php
+        sed  -i  's/%%DBUS%%/${{ secrets.DBUS }}/g' .env.local.dist.php
         sed  -i  's/%%DBPASS%%/${{ secrets.DBPASS }}/g' .env.local.dist.php
         sed  -i  's/%%DBHOST%%/${{ secrets.DBHOST }}/g' .env.local.dist.php
         sed  -i  's/%%DBNAME%%/${{ secrets.DBNAME }}/g' .env.local.dist.php
