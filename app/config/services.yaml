@@ -18,6 +18,8 @@ services:
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
+            - '../src/DataFixtures/'
+            - '../src/Factory/'
             - '../src/Kernel.php'
     payment.PaymentMethodValidator:
         class: App\Service\Payment\PaymentMethodValidator

@@ -21,7 +21,7 @@ spec:
 
       containers:
         - name: symfony-shopapp-new3
-          image: faezsal/symfony-shop-app:4.0.0
+          image: faezsal/symfony-shop-app:v1.3.0
           volumeMounts:
             - mountPath: /var/www/html
               name: my-volume32
